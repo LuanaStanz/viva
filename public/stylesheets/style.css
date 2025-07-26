@@ -1,0 +1,272 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: white;
+}
+/*______________________________nav section______________________________*/
+nav {
+  background-color: #fffdfd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+/*______________________________intro section______________________________*/
+#intro {
+  background: linear-gradient(to right, #01a4b6, #10caa7);
+  color: white;
+  text-align: center;
+  padding: 140px;
+}
+
+#intro h1 {
+  font-size: 3rem;
+}
+
+#intro p {
+  font-size: 1.2rem;
+}
+/*________________________________cards________________________________________*/
+
+section {
+  font-size: 1rem;
+  padding: 60px 20px;
+  max-width: 1200px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.cards article {
+  flex: 1 1 30%;
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cards img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.cards h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.cards p {
+  margin-bottom: 15px;
+}
+
+.cards button {
+  padding: 10px 20px;
+  background-color: rgb(43, 43, 223);
+  color: white;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.cards button:hover {
+  background-color: rgb(67, 67, 236);
+  transform: translateY(5px);
+}
+/*_____________________________main_________________________*/
+#estrutura, #comunidade {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+#estrutura {
+  flex-direction: row; 
+}
+
+#comunidade {
+  flex-direction: row-reverse; 
+}
+
+#estrutura h2, #comunidade h2 {
+  font-size: 1.8rem;
+}
+
+#estrutura .texto, #comunidade .texto {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 500px;
+}
+
+#estrutura img, #comunidade img {
+  width: 50%;
+  max-width: 500px;
+  border-radius: 8px;
+}
+
+#estrutura button, #comunidade button {
+  background-color: #0edbb6;
+  color:rgb(63, 78, 78);
+  font-size: 1rem;
+  font-weight: bold;
+  border-style: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+}
+
+#estrutura button:hover, #comunidade button:hover {
+  transform: translateY(5px);
+}
+/*_________________________footer______________________________*/
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+
+}
+
+footer a {
+  color: #10caa7;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+/*SOBRE*/
+#sobre hr{
+  margin: 20px;
+}
+/*AULAS*/
+#aulas {
+  background-color: aliceblue;
+}
+div#tennis, div#futebol, div#beach {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 8px;
+  
+}
+div#tennis {
+  padding: 10px;
+  border-top:5px solid #ff6384;
+  border-left: 5px solid #ff6384;
+  border-bottom: 5px solid #ff6384;
+}
+
+div#futebol {
+  border-left: 5px solid #36a2eb;
+  border-bottom: 5px solid #36a2eb;
+}
+
+div#beach {
+  border-left: 5px solid #ffce56;
+  border-bottom: 5px solid #ffce56;
+}
+
+/*ESTRUTURA*/
+#body_estrutura {
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+}
+div img{
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+#quadra_tennis, #quadra_beach {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+/*_________________________Responsividade_________________________*/
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+  }
+  
+  nav img{
+    display: none;
+  }
+
+   #intro {
+    padding: 60px 20px;
+  }
+
+  #intro h1 {
+    font-size: 2rem;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cards article {
+    width: 100%;
+  }
+
+  #estrutura, #comunidade {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #estrutura img, #comunidade img {
+    width: 100%;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+#ver-mais {
+  margin: 30px auto 0;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 2rem;
+  color: #10caa7;
+  background: none;
+  border: none;
+}
