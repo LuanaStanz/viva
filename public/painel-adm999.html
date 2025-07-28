@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>VIVA Sport Center</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <style>
+      .reservado {
+          background-color: red;
+          color: white;
+      }
+      .disponivel {
+          background-color: white;
+          color: black;
+      }
+      .indisponivel {
+          background-color: gray;
+          color: black;
+      }
+      table {
+          width: 100%;
+          table-layout: fixed;
+          border-collapse: collapse;
+          margin-bottom: 2rem;
+      }
+      th, td {
+          border: 1px solid #aaa;
+          padding: 5px;
+          text-align: center;
+      }
+      th #domingo {
+          background-color: gray;           
+      }
+      #verificacao_senha button, #selecionar_quadra button {
+        background-color: #0dc7a5;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+      }
+      #verificacao_senha button:hover, #selecionar_quadra button:hover {
+        background-color: #0edbb6;
+        transform: translateY(4px); 
+      }
+    </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <img src="images/logo.png" alt="Logo VIVA" height="60">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="estrutura.html">Estrutura</a></li>
+        <li><a href="aulas.html">Aulas</a></li>
+        <li><a href="aluguel.html">Aluguel</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section>
+    <h1>Painel Administrativo</h1>
+    <p>Atualize a disponibilidade das quadras</p>
+
+    <!--senha-->
+    <div id="verificacao_senha">
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha">
+      <button id="verificar_senha">Entrar</button>
+    </div>
+
+    <div id="painel_admin" style="display: none;">
+      <div id="selecionar_quadra">
+        <label for="esc_quadra">Escolha uma quadra:</label>
+        <select id="esc_quadra" name="esc_quadra">
+          <option value="grama">quadra de grama</option>
+          <option value="areia1">quadra de areia 1</option>
+          <option value="areia2">quadra de areia 2</option>
+        </select>
+        <button id="ver_disponibilidade">Ver e editar disponibilidade</button>
+      </div>
+
+      <div id="tabelas_disponibilidade"></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>VIVA Sport Center</p>
+    <p>Contato: (88) 99633-1508 | Triângulo, Quixadá-CE | Seg a Sáb: 17:30 - 23h</p>
+    <p>
+      <a href="https://www.instagram.com/vivasportcenter/">Instagram</a> |
+      <a href="https://www.facebook.com/vivasportcenter/">Facebook</a>
+    </p>
+  </footer>
+
+    <script>
+      const SENHA_CORRETA = "seiNao";
+
+      document.getElementById("verificar_senha").addEventListener("click", () => {
+        const senhaDigitada = document.getElementById("senha").value;
+
+        if (senhaDigitada === SENHA_CORRETA) {
+          document.getElementById("verificacao_senha").style.display = "none";
+          document.getElementById("painel_admin").style.display = "block";
+        } else {
+          alert("Senha incorreta!");
+        }
+      });
+
+        const HORARIOS = ["18-19h", "19-20h", "20-21h", "21-22h", "22-23h"];
+        const NOMES_DIAS = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+
+        function formatarData(data){
+            const [ano, mes, dia] = data.split("-");
+            return `${dia}-${mes}-${ano}`;
+        }
+        
+        function criarTabela(tipo, reservas){
+            const container = document.getElementById("tabelas_disponibilidade");
+            container.innerHTML = ""; //limpa
+
+            const texto = document.createElement("p");
+            texto.innerHTML = `Exibindo quadra de ${tipo}`;
+            container.appendChild(texto);
+
+            //array com os dias do json ordenados
+            const datasDoJson = Object.keys(reservas).sort(); //json para string
+            const diasTotais = datasDoJson.map(s => new Date(s)); //string para Date
+
+            //uma tabela para cada semana
+            for(let semana = 0; semana < diasTotais.length; semana += 7){
+                const diasSemana = diasTotais.slice(semana, semana + 7); //pega os dias da semana
+                const tabela = document.createElement("table");
+                
+                //CABEÇALHO SEMANAL (Horário | Seg | Ter ... Dom)
+                const thead = document.createElement("thead");
+                const trHead = document.createElement("tr");
+                
+                const thHorario = document.createElement("th");
+                thHorario.textContent = "Horário";
+                trHead.appendChild(thHorario);
+
+                //dias da semana
+                diasSemana.forEach(data => {
+                    const formato = data.toISOString().split('T')[0]; //yyyy-mm-dd
+                    const diaSemana = data.getDay(); //0=seg, 1=ter...
+
+                    const th = document.createElement("th");
+                    th.textContent = `${NOMES_DIAS[diaSemana]} ${formatarData(formato)}`;
+                    
+                    if(diaSemana === 6){ //se é domingo-> gray
+                        th.id = "domingo";
+                    }
+                    
+                    trHead.appendChild(th);
+                });
+
+                thead.appendChild(trHead);
+                tabela.appendChild(thead);
+
+                //CORPO DA TABELA (uma linha para cada horário)
+                const tbody = document.createElement("tbody");
+
+                // cria uma linha para cada horário
+                HORARIOS.forEach(horario => {
+                    const tr = document.createElement("tr");
+                    
+                    //coluna do horário
+                    const thHorario = document.createElement("th");
+                    thHorario.textContent = horario;
+                    tr.appendChild(thHorario);
+
+                    //para cada dia da semana, verifica disponibilidade
+                    diasSemana.forEach(data => {
+                        const formato = data.toISOString().split('T')[0]; //yyyy-mm-dd
+                        const diaSemana = data.getDay(); //0=Dom, 1=seg...
+                        const td = document.createElement("td");
+
+                        if(diaSemana === 6){//domingo sempre indisponível
+                            td.className = "indisponivel";
+                            td.textContent = "-";
+                        } 
+                        else{
+                            const reservado = reservas[formato] && reservas[formato].includes(horario);
+                            td.className = reservado ? "reservado" : "disponivel";
+                            
+                            const statusText = document.createElement("div");
+                            statusText.textContent = reservado ? "Reservado" : "Livre";
+                            
+                            const btn = document.createElement("button");
+                            btn.textContent = "Mudar status";
+                            btn.addEventListener("click", () => {
+                                const rota = reservado ? "liberar" : "remover";
+                                fetch(`/quadras/${tipo}/${rota}`, {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    },
+                                    body: JSON.stringify({ data: formato, horario })
+                                })
+                                .then(res => {
+                                    if (res.ok) {
+                                        return res.json();
+                                    } else {
+                                        throw new Error("Erro ao mudar status");
+                                    }
+                                })
+                                .then(() => {
+                                    return fetch(`/quadras/${tipo}/disponibilidade`);//recarrega a tabela após mudança
+                                })
+                                .then(res => res.json())
+                                .then(data => criarTabela(tipo, data))
+                                .catch(err => alert(err.message));
+                            });
+
+                            td.appendChild(statusText);
+                            td.appendChild(btn);
+                        }
+
+                        tr.appendChild(td);
+                    });
+
+                    tbody.appendChild(tr);
+                });
+
+                tabela.appendChild(tbody);
+                container.appendChild(tabela);
+            }
+        }
+
+        document.getElementById("ver_disponibilidade").addEventListener("click", () => {
+        const quadra = document.getElementById("esc_quadra").value;
+        fetch(`/quadras/${quadra}/disponibilidade`)
+            .then(res => res.json())
+            .then(data => criarTabela(quadra, data))
+            .catch(err => alert("Erro ao carregar disponibilidade."));
+        });
+    </script>
+</body>
+</html>
