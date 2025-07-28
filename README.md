@@ -52,3 +52,11 @@ http://localhost:3000
         </td>
     </tr>
 </table>
+
+<h2>🛠️ Contribuições</h2>
+<ul>
+  <li><strong>Luana Stanz:</strong> Responsável por praticamente todo o projeto, incluindo frontend, backend, integração, estrutura e testes.</li>
+  <li><strong>Cristiano Mendes:</strong> Criou o formulário de confirmação, colaborou com algumas telas e contribuiu com parte dos estilos.</li>
+  <li><strong>Francisco Pedro:</strong> Desenvolveu algumas telas e contribuiu com ajustes de estilo visual.</li>
+</ul>
+
