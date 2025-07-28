@@ -9,6 +9,11 @@ body {
   line-height: 1.6;
   background-color: white;
 }
+
+header > nav {
+  padding: 10px;
+}
+
 /*______________________________nav section______________________________*/
 nav {
   background-color: #fffdfd;
@@ -30,6 +35,7 @@ nav a {
   color: black;
   font-weight: bold;
 }
+
 /*______________________________intro section______________________________*/
 #intro {
   background: linear-gradient(to right, #01a4b6, #10caa7);
@@ -45,6 +51,7 @@ nav a {
 #intro p {
   font-size: 1.2rem;
 }
+
 /*________________________________cards________________________________________*/
 
 section {
@@ -101,41 +108,47 @@ section {
   background-color: rgb(67, 67, 236);
   transform: translateY(5px);
 }
+
 /*_____________________________main_________________________*/
-#estrutura, #comunidade {
+#estrutura,
+#comunidade {
   display: flex;
   gap: 40px;
   align-items: center;
 }
 
 #estrutura {
-  flex-direction: row; 
+  flex-direction: row;
 }
 
 #comunidade {
-  flex-direction: row-reverse; 
+  flex-direction: row-reverse;
 }
 
-#estrutura h2, #comunidade h2 {
+#estrutura h2,
+#comunidade h2 {
   font-size: 1.8rem;
 }
 
-#estrutura .texto, #comunidade .texto {
+#estrutura .texto,
+#comunidade .texto {
   display: flex;
   flex-direction: column;
   gap: 16px;
   max-width: 500px;
 }
 
-#estrutura img, #comunidade img {
+#estrutura img,
+#comunidade img {
   width: 50%;
   max-width: 500px;
   border-radius: 8px;
 }
 
-#estrutura button, #comunidade button {
+#estrutura button,
+#comunidade button {
   background-color: #0edbb6;
-  color:rgb(63, 78, 78);
+  color: rgb(63, 78, 78);
   font-size: 1rem;
   font-weight: bold;
   border-style: none;
@@ -143,9 +156,12 @@ section {
   border-radius: 5px;
 }
 
-#estrutura button:hover, #comunidade button:hover {
+#estrutura button:hover,
+#comunidade button:hover {
   transform: translateY(5px);
 }
+
+
 /*_________________________footer______________________________*/
 footer {
   background-color: #333;
@@ -164,25 +180,35 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
+
 /*SOBRE*/
-#sobre hr{
+#sobre{
+  min-height: 80vh;
+}
+#sobre hr {
   margin: 20px;
 }
+
 /*AULAS*/
 #aulas {
   background-color: aliceblue;
+  min-height: 80vh;
 }
-div#tennis, div#futebol, div#beach {
+
+div#tennis,
+div#futebol,
+div#beach {
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 20px;
   border-radius: 8px;
-  
+
 }
+
 div#tennis {
   padding: 10px;
-  border-top:5px solid #ff6384;
+  border-top: 5px solid #ff6384;
   border-left: 5px solid #ff6384;
   border-bottom: 5px solid #ff6384;
 }
@@ -203,17 +229,21 @@ div#beach {
   display: flex;
   flex-direction: column;
 }
-div img{
+
+div img {
   width: 100%;
   height: auto;
   border-radius: 8px;
 }
-#quadra_tennis, #quadra_beach {
+
+#quadra_tennis,
+#quadra_beach {
   background-color: white;
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
   margin-top: 20px;
+  max-width: 500px;
 }
 
 /*_________________________Responsividade_________________________*/
@@ -225,15 +255,16 @@ div img{
     gap: 10px;
     padding: 10px 0;
   }
-  nav a{
+
+  nav a {
     color: rgb(216, 216, 216);
   }
-  
-  nav img{
+
+  nav img {
     display: none;
   }
 
-   #intro {
+  #intro {
     padding: 60px 20px;
   }
 
@@ -250,12 +281,14 @@ div img{
     width: 100%;
   }
 
-  #estrutura, #comunidade {
+  #estrutura,
+  #comunidade {
     flex-direction: column;
     text-align: center;
   }
 
-  #estrutura img, #comunidade img {
+  #estrutura img,
+  #comunidade img {
     width: 100%;
   }
 }
